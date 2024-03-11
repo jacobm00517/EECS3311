@@ -13,16 +13,30 @@ public class MainFrame extends JFrame {
 	final JButton searchButton = new JButton("Book Search");
 	final JButton requestButton = new JButton("Requests");
 	final JButton discountButton = new JButton("Discounted items");
-	final JButton button4name = new JButton("Button4");
+	
 	private JPanel east;
 	private JPanel search;
 	private Component current;
 	
-
-	private JLabel searchLabel = new JLabel("Search:");;
-	private JTextField searchText = new JTextField(25);;
+	//east
+	private JTextArea notifications = new JTextArea("BlahBlahBlahBalH notifications will go here");
+	
+	private JTextArea subscriptionsList = new JTextArea("BlahBlahBlahBalH subscriptions\n");
+	
+	private JTextArea courseList = new JTextArea("BlahBlahBlahBalH courses and their books\n");
+	
+	private JLabel searchLabel = new JLabel("Search:");
+	private JTextField searchText = new JTextField(25);
 	private JButton buttonSearch = new JButton("Search");
-	private JButton buttonBack = new JButton("Back");
+	private final JLabel searchStatus = new JLabel(" ");
+	
+	private JLabel requestLabel = new JLabel("Request (Item name, Publication date, Author)");
+	private JTextField requestText = new JTextField(25);
+	private JButton requestInputButton = new JButton("Submit");
+	
+	private JTextArea discountItems = new JTextArea("Place discounted items. Will likely have to have buttons.");
+	
+	
 	
 	public MainFrame() {
 		
@@ -44,10 +58,12 @@ public class MainFrame extends JFrame {
 	    
 	    buttons.setLayout(new BoxLayout(buttons, BoxLayout.Y_AXIS));
 	    
+	    
+	    
 	    this.east = new JPanel(new FlowLayout());
 	    this.east.setBackground(Color.RED);
-	    this.east.add(button4name);
 	    this.current = this.east;
+	    this.east.add(notifications);
 	    
 	    this.setLayout(new BorderLayout());
 	    this.add(buttons, BorderLayout.WEST);
@@ -101,6 +117,14 @@ public class MainFrame extends JFrame {
 	        }
 	    });
 	    
+	    buttonSearch.addActionListener(new ActionListener() {
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	        	//send searchText.getText() to search() method
+	            
+	        }
+	    });
+	    
 	}
 	
 	private void east() {
@@ -109,8 +133,9 @@ public class MainFrame extends JFrame {
 	    
 	    this.east = new JPanel(new FlowLayout());
 	    this.east.setBackground(Color.RED);
-	    this.east.add(button4name);
+	    this.east.add(notifications);
 	    
+
 	    this.add(this.east);
 	    this.validate();
 	    this.current=this.east;
@@ -123,7 +148,7 @@ public class MainFrame extends JFrame {
 	    
 	    JPanel subs = new JPanel();
 	    subs.setBackground(Color.ORANGE);
-	    
+	    subs.add(subscriptionsList);
 	    
 	    this.add(subs);
 	    this.validate();
@@ -136,6 +161,7 @@ public class MainFrame extends JFrame {
 	    
 	    JPanel courses = new JPanel();
 	    courses.setBackground(Color.YELLOW);
+	    courses.add(this.courseList);
 	    
 	    
 	    this.add(courses);
@@ -143,34 +169,6 @@ public class MainFrame extends JFrame {
 	    this.current=courses;
 	}
 	
-	private void requests() {
-		this.remove(this.current);
-	    this.setTitle("Yorku Library Home");
-	    
-	    JPanel requests = new JPanel();
-	    requests.setBackground(Color.BLUE);
-	    
-	    this.add(requests);
-	    this.validate();
-	    this.current=requests;
-		
-	}
-	
-	private void discounts() {
-		this.remove(this.current);
-	    this.setTitle("Yorku Library Home");
-	    
-	    JPanel discounts = new JPanel();
-	    discounts.setBackground(Color.MAGENTA);
-	    
-	    this.add(discounts);
-	    this.validate();
-	    this.current=discounts;
-		
-	}
-	
-
-
 	public void searchFrame() {
 		this.remove(this.current);
 	    this.setTitle("Yorku Library Search");
@@ -184,11 +182,46 @@ public class MainFrame extends JFrame {
 	    this.search.add(searchLabel);
 	    this.search.add(searchText);
 	    this.search.add(buttonSearch);
-	    this.search.add(buttonBack);
+	    this.search.add(searchStatus);
+	    
 	    this.add(search);
 	    this.validate();
 	    this.current=this.search;
 	}
+	
+	private void requests() {
+		this.remove(this.current);
+	    this.setTitle("Yorku Library Home");
+	    
+	    JPanel requests = new JPanel();
+	    requests.setBackground(Color.BLUE);
+	    requests.add(requestLabel);
+	    requests.add(requestText );
+	    requests.add(requestInputButton);
+	    
+	    this.add(requests);
+	    this.validate();
+	    this.current=requests;
+		
+	}
+	
+	private void discounts() {
+		this.remove(this.current);
+	    this.setTitle("Yorku Library Home");
+	    
+	    JPanel discounts = new JPanel();
+	    discounts.setBackground(Color.MAGENTA);
+	    discounts.add(discountItems);
+	    
+	    this.add(discounts);
+	    this.validate();
+	    this.current=discounts;
+		
+	}
+	
+
+
+	
 	
 	
 	
