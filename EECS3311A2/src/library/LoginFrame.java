@@ -35,12 +35,15 @@ class PassWordDialog extends JDialog {
 
     private final JLabel emailLabel = new JLabel("email");
     private final JLabel passwordLabel = new JLabel("Password");
+    private final JLabel userTypeLabel = new JLabel("User type");
 
     private final JTextField emailField = new JTextField(15);
     private final JPasswordField passwordField = new JPasswordField();
+    private final JTextField userTypeField = new JTextField(15);
 
     private final JButton buttonOk = new JButton("Login");
     private final JButton buttonCancel = new JButton("Cancel");
+    private final JButton buttonRegister = new JButton("Register");
 
     private final JLabel jlblStatus = new JLabel(" ");
 
@@ -52,14 +55,16 @@ class PassWordDialog extends JDialog {
         super(parent, modal);
 
         
-        JPanel namePanel = new JPanel(new GridLayout(2, 1));
+        JPanel namePanel = new JPanel(new GridLayout(3, 1));
         namePanel.add(emailLabel);
         namePanel.add(passwordLabel);
+        namePanel.add(userTypeLabel);
 
         
-        JPanel fieldsPanel = new JPanel(new GridLayout(2, 1));
+        JPanel fieldsPanel = new JPanel(new GridLayout(3, 1));
         fieldsPanel.add(emailField);
         fieldsPanel.add(passwordField);
+        fieldsPanel.add(userTypeField);
 
         JPanel inputsPanel = new JPanel();
         inputsPanel.add(namePanel);
@@ -67,6 +72,7 @@ class PassWordDialog extends JDialog {
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(buttonOk);
+        buttonPanel.add(buttonRegister);
         buttonPanel.add(buttonCancel);
 
         JPanel statusPanel = new JPanel(new BorderLayout());
@@ -78,7 +84,7 @@ class PassWordDialog extends JDialog {
         setLayout(new BorderLayout());
         add(inputsPanel, BorderLayout.CENTER);
         add(statusPanel, BorderLayout.SOUTH);
-        pack();
+        setSize(400, 200);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
@@ -109,6 +115,63 @@ class PassWordDialog extends JDialog {
                 setVisible(false);
                 parent.dispose();
                 System.exit(0);
+            }
+        });
+        buttonRegister.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if ("student".equals(userTypeField.getText())||"faculty".equals(userTypeField.getText())||"non-faculty".equals(userTypeField.getText())) {
+                	User newURUser = new User(userTypeField.getText(), emailField.getText(), new String(passwordField.getPassword()));
+                	String pathUR = "/Users/jacobabarrota/Downloads/CSV_Example/URuser.csv";
+            		MaintainUnregisteredUser maintainUR = new MaintainUnregisteredUser();
+            	
+            		try {
+						maintainUR.load(pathUR);
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+            		
+            		maintainUR.users.add(newURUser);
+            		
+            		try {
+						maintainUR.update(pathUR);
+					} catch (Exception e1) {
+						e1.printStackTrace();
+					}
+            		
+            		jlblStatus.setText("Please wait for admin approval.");
+                }
+                
+                else if ("visitor".equals(userTypeField.getText())) {
+                	User newUser = new User(userTypeField.getText(), emailField.getText(), new String(passwordField.getPassword()));
+                	String path = "/Users/jacobabarrota/Downloads/CSV_Example/user.csv";
+            		MaintainUser maintain = new MaintainUser();
+            	
+            		try {
+						maintain.load(path);
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+            		
+            		maintain.users.add(newUser);
+            		
+            		try {
+						maintain.update(path);
+					} catch (Exception e1) {
+						e1.printStackTrace();
+					}
+            		
+            		jlblStatus.setText("Registration successful.");
+                }
+                
+                else {
+                	jlblStatus.setText("<html>Use a valid email and pick one of the following user types:<br/>student, faculty, non-faculty, or visitor</html>");
+                	
+                	
+                }
+                
             }
         });
     }
