@@ -120,66 +120,7 @@ class PassWordDialog extends JDialog {
         buttonRegister.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if ("student".equals(userTypeField.getText())||"faculty".equals(userTypeField.getText())||"non-faculty".equals(userTypeField.getText())) {
-                	User newURUser;
-                	if ("student".equals(userTypeField.getText())) {
-                		newURUser = new Student(userTypeField.getText(), emailField.getText(), new String(passwordField.getPassword()));
-                	}
-                	else if ("faculty".equals(userTypeField.getText())) {
-                		newURUser = new Faculty(userTypeField.getText(), emailField.getText(), new String(passwordField.getPassword()));
-                	}
-                	else {
-                		newURUser = new Nonfaculty(userTypeField.getText(), emailField.getText(), new String(passwordField.getPassword()));
-                	}
-                	String pathUR = pathNames.unregisteredDBPath;
-            		MaintainUnregisteredUser maintainUR = new MaintainUnregisteredUser();
-            	
-            		try {
-						maintainUR.load(pathUR);
-					} catch (Exception e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-            		
-            		maintainUR.users.add(newURUser);
-            		
-            		try {
-						maintainUR.update(pathUR);
-					} catch (Exception e1) {
-						e1.printStackTrace();
-					}
-            		
-            		jlblStatus.setText("Please wait for admin approval.");
-                }
-                
-                else if ("visitor".equals(userTypeField.getText())) {
-                	User newUser = new Visitor(userTypeField.getText(), emailField.getText(), new String(passwordField.getPassword()));
-                	String path = pathNames.path;
-            		MaintainUser maintain = new MaintainUser();
-            	
-            		try {
-						maintain.load(path);
-					} catch (Exception e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-            		
-            		maintain.users.add(newUser);
-            		
-            		try {
-						maintain.update(path);
-					} catch (Exception e1) {
-						e1.printStackTrace();
-					}
-            		
-            		jlblStatus.setText("Registration successful.");
-                }
-                
-                else {
-                	jlblStatus.setText("<html>Use a valid email and pick one of the following user types:<br/>student, faculty, non-faculty, or visitor</html>");
-                	
-                	
-                }
+            	jlblStatus.setText(Facade.makeUser(userTypeField.getText(), emailField.getText(), new String(passwordField.getPassword())));
                 
             }
         });

@@ -1,9 +1,9 @@
 package library;
 
 public abstract class User {
-	public String userType;
-	public String email;
-	public String password;
+	private String userType;
+	private String email;
+	private String password;
 	
 	public User(String userType, String email, String password) {
 		super();
