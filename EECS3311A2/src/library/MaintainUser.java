@@ -14,9 +14,21 @@ public class MaintainUser {
 		reader.readHeaders();
 		
 		while(reader.readRecord()){ 
-			User user = new User();
+			User user;
+			if (reader.get("userType").equals("student")) {
+				user = new Student();
+			}
+			else if (reader.get("userType").equals("faculty")) {
+				user = new Faculty();
+			}
+			else if (reader.get("userType").equals("visitor")) {
+				user = new Visitor();
+			}
+			else {
+				user = new Nonfaculty();
+			}
 			//userType,email,password
-			user.setUserType("userType");
+			user.setUserType(reader.get("userType"));
 			user.setEmail(reader.get("email"));
 			user.setPassword(reader.get("password"));
 			users.add(user);

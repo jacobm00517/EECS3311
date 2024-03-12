@@ -121,8 +121,17 @@ class PassWordDialog extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if ("student".equals(userTypeField.getText())||"faculty".equals(userTypeField.getText())||"non-faculty".equals(userTypeField.getText())) {
-                	User newURUser = new User(userTypeField.getText(), emailField.getText(), new String(passwordField.getPassword()));
-                	String pathUR = "/Users/jacobabarrota/Downloads/CSV_Example/URuser.csv";
+                	User newURUser;
+                	if ("student".equals(userTypeField.getText())) {
+                		newURUser = new Student(userTypeField.getText(), emailField.getText(), new String(passwordField.getPassword()));
+                	}
+                	else if ("faculty".equals(userTypeField.getText())) {
+                		newURUser = new Faculty(userTypeField.getText(), emailField.getText(), new String(passwordField.getPassword()));
+                	}
+                	else {
+                		newURUser = new Nonfaculty(userTypeField.getText(), emailField.getText(), new String(passwordField.getPassword()));
+                	}
+                	String pathUR = pathNames.unregisteredDBPath;
             		MaintainUnregisteredUser maintainUR = new MaintainUnregisteredUser();
             	
             		try {
@@ -144,8 +153,8 @@ class PassWordDialog extends JDialog {
                 }
                 
                 else if ("visitor".equals(userTypeField.getText())) {
-                	User newUser = new User(userTypeField.getText(), emailField.getText(), new String(passwordField.getPassword()));
-                	String path = "/Users/jacobabarrota/Downloads/CSV_Example/user.csv";
+                	User newUser = new Visitor(userTypeField.getText(), emailField.getText(), new String(passwordField.getPassword()));
+                	String path = pathNames.path;
             		MaintainUser maintain = new MaintainUser();
             	
             		try {

@@ -1,6 +1,6 @@
 package library;
 
-public class User {
+public abstract class User {
 	public String userType;
 	public String email;
 	public String password;

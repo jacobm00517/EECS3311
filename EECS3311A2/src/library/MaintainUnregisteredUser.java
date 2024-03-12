@@ -15,9 +15,23 @@ public class MaintainUnregisteredUser {
 		reader.readHeaders();
 		
 		while(reader.readRecord()){ 
-			User user = new User();
+			User user;
+			if (reader.get("userType").equals("student")) {
+				user = new Student();
+			}
+			else if (reader.get("userType").equals("faculty")) {
+				user = new Faculty();
+			}
+			else if (reader.get("userType").equals("visitor")) {
+				user = new Visitor();
+			}
+			else {
+				user = new Nonfaculty();
+			}
+			
+			
 			//userType,email,password
-			user.setUserType("userType");
+			user.setUserType(reader.get("userType"));
 			user.setEmail(reader.get("email"));
 			user.setPassword(reader.get("password"));
 			users.add(user);
@@ -50,7 +64,7 @@ public class MaintainUnregisteredUser {
 	
 	//to move approved users from unregistered database to registered database
 	public void register(ArrayList<User> usersApproved) throws Exception {
-		String path = "/Users/jacobabarrota/Downloads/CSV_Example/user.csv";
+		String path = pathNames.path;
 		MaintainUser maintain = new MaintainUser();
 	
 		maintain.load(path);
@@ -69,11 +83,10 @@ public class MaintainUnregisteredUser {
 
 	//to remove registered or denied accounts
 	public void removeUR(ArrayList<User> usersRemoved) throws Exception {
-		String path = "/Users/jacobabarrota/Downloads/CSV_Example/URuser.csv";
+		String path = pathNames.unregisteredDBPath;
 		//if a user in the database is part of the users to be removed, remove it from list (and therefore database).
 		for (User u: usersRemoved) {
 			if (users.contains(u)) {
-				System.out.println("TRUE");
 				users.remove(u);
 			}
 		}
