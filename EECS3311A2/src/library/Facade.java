@@ -84,19 +84,12 @@ public interface Facade {
 	public static String addToDatabase(User newUser) {
 		if (newUser.getuserType().equals("visitor")) {
 			String path = pathNames.path;
-    		MaintainUser maintain = new MaintainUser();
-    	
-    		try {
-				maintain.load(path);
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+    		UserDatabase maintain = new MaintainUserProxy();
     		
-    		maintain.users.add(newUser);
+    		maintain.addUser(newUser);
     		
     		try {
-				maintain.update(path);
+				maintain.update();
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}

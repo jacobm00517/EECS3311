@@ -65,17 +65,15 @@ public class MaintainUnregisteredUser {
 	//to move approved users from unregistered database to registered database
 	public void register(ArrayList<User> usersApproved) throws Exception {
 		String path = pathNames.path;
-		MaintainUser maintain = new MaintainUser();
-	
-		maintain.load(path);
+		UserDatabase maintain = new MaintainUserProxy();
 		
 		//add each user to registered ArrayList
 		for (User u: usersApproved) {
-			maintain.users.add(u);
+			maintain.addUser(u);
 		}
 		
 		//update registered database
-		maintain.update(path);
+		maintain.update();
 		
 		//removed registered users from database
 		removeUR(usersApproved);

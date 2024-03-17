@@ -13,6 +13,7 @@ public class MainFrame extends JFrame {
 	final JButton searchButton = new JButton("Book Search");
 	final JButton requestButton = new JButton("Requests");
 	final JButton discountButton = new JButton("Discounted items");
+	final JButton exitApp = new JButton("Exit app");
 	
 	private JPanel east;
 	private JPanel search;
@@ -38,6 +39,7 @@ public class MainFrame extends JFrame {
 	
 	
 	
+	
 	public MainFrame() {
 		
 		this.setVisible(true);
@@ -55,7 +57,7 @@ public class MainFrame extends JFrame {
 	    buttons.add(searchButton);
 	    buttons.add(requestButton);
 	    buttons.add(discountButton);
-	    
+	    buttons.add(exitApp);
 	    buttons.setLayout(new BoxLayout(buttons, BoxLayout.Y_AXIS));
 	    
 	    
@@ -121,6 +123,16 @@ public class MainFrame extends JFrame {
 	        @Override
 	        public void actionPerformed(ActionEvent e) {
 	        	//send searchText.getText() to search() method
+	            
+	        }
+	    });
+	    
+	    exitApp.addActionListener(new ActionListener() {
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	        	//To Do: Save everything to databases
+	        	setVisible(false);
+                dispose();
 	            
 	        }
 	    });

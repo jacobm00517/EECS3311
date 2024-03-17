@@ -1,15 +1,18 @@
 package library;
 import java.io.File;
+import java.util.*;
 import java.io.FileWriter;
-import java.util.ArrayList;
+
 import com.csvreader.CsvReader;
 import com.csvreader.CsvWriter;
 
-public class MaintainUser {
-	public ArrayList<User> users = new ArrayList<User>();
-	public String path;
+public class MaintainUser implements UserDatabase{
+	private List<User> users = new ArrayList<User>();
+	private String path;
 	
+	@Override
 	public void load(String path) throws Exception{
+		System.out.println("System loaded");
 		CsvReader reader = new CsvReader(path); 
 		reader.readHeaders();
 		
@@ -32,12 +35,15 @@ public class MaintainUser {
 			user.setEmail(reader.get("email"));
 			user.setPassword(reader.get("password"));
 			users.add(user);
+			System.out.println(user.getEmail());
 		}
 	}
 	
-	public void update(String path) throws Exception{
+	
+	@Override
+	public void update() throws Exception{
 		try {		
-				CsvWriter csvOutput = new CsvWriter(new FileWriter(path, false), ',');
+				CsvWriter csvOutput = new CsvWriter(new FileWriter(pathNames.path, false), ',');
 				//name,userType,email,password
 				csvOutput.write("userType");
 		    	csvOutput.write("email");
@@ -58,6 +64,33 @@ public class MaintainUser {
 				e.printStackTrace();
 			}
 	}
+	
+	//Based off a Users email in string, find the instance of that user.
+	@Override
+	public User getRegisteredUserByEmail(String email) throws Exception {
+		for (User u : users) {
+			if (u.getEmail().equals("email")) {
+				return u;
+			}
+		}
+		return null;
+	}
+	
+	@Override
+	public void addUser(User user) {
+		users.add(user);
+	}
+	
+	@Override
+	public List<User> getUsers(){
+		return this.users;
+	}
+	
+	@Override
+	public void setUsers(List<User> users) {
+		this.users = new ArrayList<>(users);
+	}
+	
 	/*public static void main(String [] args) throws Exception{
 		String path = "/Users/jacobabarrota/Downloads/CSV_Example/user.csv";
 		MaintainUser maintain = new MaintainUser();
