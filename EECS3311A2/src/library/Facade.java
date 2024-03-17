@@ -5,7 +5,7 @@ import javax.mail.internet.*;
 
 public interface Facade {
 
-	
+	//to make a user from registering
 	public static String makeUser (String userType, String email, String password) {
 		User newUnregisteredUser;
 		if (false==userTypeValid(userType)) {

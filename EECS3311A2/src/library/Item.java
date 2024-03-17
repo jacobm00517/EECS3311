@@ -2,18 +2,18 @@ package library;
 
 import java.util.Date;
 
-public abstract class Item {
-	/*
-	String itemType;
-	String title;
-	String ID;
-	String location;
-	boolean rentable;
-	Date borrowedDate;
-	Date dueDate;
-	User owner;
-	String publisher;
-	Double cost;
+public class Item {
+
+	private String itemType;
+	private String title;
+	private String ID;
+	private String location;
+	private boolean rentable;
+	private Date borrowedDate;
+	private Date dueDate;
+	private User owner;
+	private String publisher;
+	private Double cost;
 	
 	
 	public String getItemType() {
@@ -66,12 +66,20 @@ public abstract class Item {
 	public User getOwner() {
 		return owner;
 	}
-	public void setOwner(String owner) {
-		if (owner.equals("admin"));{
+	public void setOwner(String email) {
+		if (owner.equals("admin")){
 			this.owner = null;
 		}
+		
 		else {
-			this.owner = ;
+			UserDatabase userDatabase = new MaintainUserProxy();
+			try {
+				this.owner = userDatabase.getRegisteredUserByEmail(email);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				System.out.println("Error: User does not exist.");
+			}
 		}
 		
 	}
@@ -87,5 +95,9 @@ public abstract class Item {
 	public void setCost(Double cost) {
 		this.cost = cost;
 	}
-	*/
+	public String getRentable() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

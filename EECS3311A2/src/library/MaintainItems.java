@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import com.csvreader.CsvReader;
 import com.csvreader.CsvWriter;
 
-public class MaintainItems {/*
+public class MaintainItems {
 	public ArrayList<Item> items = new ArrayList<Item>();
 	public String path;
 	
@@ -35,7 +35,8 @@ public class MaintainItems {/*
 			item.setOwner(reader.get("owner"));
 			item.setBorrowedDate(reader.get("borrowedDate"));
 			item.setDueDate(reader.get("dueDate"));
-			item.setCost(reader.get("cost"));
+			double d = Double.parseDouble(reader.get("cost"));
+			item.setCost(d);
 			items.add(item);
 		}
 	}
@@ -65,10 +66,10 @@ public class MaintainItems {/*
 					csvOutput.write(i.getLocation());
 					csvOutput.write(i.getPublisher());
 					csvOutput.write(i.getRentable());
-					csvOutput.write(i.getOwner());
-					csvOutput.write(i.getborrowedDate());
+					csvOutput.write(i.getOwner().getEmail());
+					csvOutput.write(i.getBorrowedDate());
 					csvOutput.write(i.getDueDate());
-					csvOutput.write(i.getCost());
+					csvOutput.write(i.getCost().toString());
 					csvOutput.endRecord();
 				}
 				csvOutput.close();
@@ -76,5 +77,5 @@ public class MaintainItems {/*
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
-	}*/
+	}
 }
