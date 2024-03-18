@@ -24,18 +24,23 @@ public class Main {
 		
 		prox.update();
 		
-		Item book1 = new Book("Book2", "Chemistry1", "2", "SteacieBasement", true, new Date(), new Date(), newUser, "Wiley", 0.05);
+		Item book1 = new Book("ItemDBProxyWorks", "Chemistry1", "2", "SteacieBasement", true, new Date(), new Date(), newUser, "Wiley", 0.05);
 		
-		MaintainItems itemDB = new MaintainItems();
+		/*MaintainItems itemDB = new MaintainItems();
 		
 		itemDB.load(pathNames.itemDBpath);
 		
 		itemDB.addItem(book1);
 		
-		itemDB.update(pathNames.itemDBpath);
+		itemDB.update();*/
 		
+		ItemDatabase itemDBprox = new MaintainItemsProxy();
 		
+		itemDBprox.load(pathNames.itemDBpath);
 		
+		itemDBprox.addItem(book1);
+		
+		itemDBprox.update();
 
 	}
 
