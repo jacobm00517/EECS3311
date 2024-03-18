@@ -1,14 +1,17 @@
 package library;
 
 import java.io.FileWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import com.csvreader.CsvReader;
 import com.csvreader.CsvWriter;
 
 public class MaintainItems {
-	public ArrayList<Item> items = new ArrayList<Item>();
-	public String path;
+	private ArrayList<Item> items = new ArrayList<Item>();
+	private String path;
+	private SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
 	
 	public void load(String path) throws Exception{
 		CsvReader reader = new CsvReader(path); 
@@ -22,7 +25,7 @@ public class MaintainItems {
 			else if (reader.get("item").equals("CD")) {
 				item = new CD();
 			}
-			else if (reader.get("item").equals("magazine")) {
+			else {
 				item = new Magazine();
 			}
 			//userType,email,password
@@ -32,9 +35,24 @@ public class MaintainItems {
 			item.setLocation(reader.get("location"));
 			item.setPublisher(reader.get("publisher"));
 			item.setRentable(reader.get("rentable"));
-			item.setOwner(reader.get("owner"));
-			item.setBorrowedDate(reader.get("borrowedDate"));
-			item.setDueDate(reader.get("dueDate"));
+			String itemOwner = reader.get("owner");
+			//To do: Figure out how to assign to librarian/library
+				if (itemOwner.equals("admin")){
+					item.setOwner(null);
+				}
+				
+				else {
+					UserDatabase userDatabase = new MaintainUserProxy();
+					try {
+						item.setOwner(userDatabase.getRegisteredUserByEmail(itemOwner));
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+						System.out.println("Error: User does not exist.");
+					}
+				}
+			item.setBorrowedDate(formatter.parse(reader.get("borrowedDate")));
+			item.setDueDate(formatter.parse(reader.get("dueDate")));
 			double d = Double.parseDouble(reader.get("cost"));
 			item.setCost(d);
 			items.add(item);
@@ -67,8 +85,8 @@ public class MaintainItems {
 					csvOutput.write(i.getPublisher());
 					csvOutput.write(i.getRentable());
 					csvOutput.write(i.getOwner().getEmail());
-					csvOutput.write(i.getBorrowedDate());
-					csvOutput.write(i.getDueDate());
+					csvOutput.write(formatter.format(i.getBorrowedDate()));
+					csvOutput.write(formatter.format(i.getDueDate()));
 					csvOutput.write(i.getCost().toString());
 					csvOutput.endRecord();
 				}
@@ -77,5 +95,10 @@ public class MaintainItems {
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
+	}
+
+	public void addItem(Item item) {
+		items.add(item);
+		
 	}
 }
