@@ -9,7 +9,6 @@ public class MaintainUserProxy implements UserDatabase {
 
 	private void initializeProxy() throws Exception {
 		if (users.isEmpty()) {
-			System.out.println("Check load");
 			maintainUser.load(pathNames.path);
 		}
 	}
@@ -28,7 +27,6 @@ public class MaintainUserProxy implements UserDatabase {
 		for (User u : users) {
 			System.out.println(u.getEmail());
 			if (u.getEmail().equals(email)) {
-				System.out.println("EMAIL FOUND TRUE");
 				return u;
 			}
 		}
@@ -45,7 +43,6 @@ public class MaintainUserProxy implements UserDatabase {
 	public void load(String path) throws Exception {
 		initializeProxy();
 		users.addAll(maintainUser.getUsers());
-		System.out.println("System loaded proxy done");
 	}
 	
 	@Override

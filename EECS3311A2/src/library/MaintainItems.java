@@ -4,15 +4,17 @@ import java.io.FileWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import com.csvreader.CsvReader;
 import com.csvreader.CsvWriter;
 
-public class MaintainItems {
-	private ArrayList<Item> items = new ArrayList<Item>();
+public class MaintainItems implements ItemDatabase {
+	private List<Item> items = new ArrayList<Item>();
 	private String path;
 	private SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
 	
+	@Override
 	public void load(String path) throws Exception{
 		CsvReader reader = new CsvReader(path); 
 		reader.readHeaders();
@@ -59,9 +61,10 @@ public class MaintainItems {
 		}
 	}
 	
-	public void update(String path) throws Exception{
+	@Override
+	public void update() throws Exception{
 		try {		
-				CsvWriter csvOutput = new CsvWriter(new FileWriter(path, false), ',');
+				CsvWriter csvOutput = new CsvWriter(new FileWriter(pathNames.itemDBpath, false), ',');
 				//name,userType,email,password
 				csvOutput.write("item");
 		    	csvOutput.write("title");
@@ -97,8 +100,28 @@ public class MaintainItems {
 			}
 	}
 
+	@Override
 	public void addItem(Item item) {
 		items.add(item);
-		
+	}
+	
+	@Override
+	public Item getItemByID(String ID) {
+		for (Item i : items) {
+			if (i.getID().equals(ID)) {
+				return i;
+			}
+		}
+		return null;
+	}
+	
+	@Override
+	public List<Item> getItems(){
+		return this.items;
+	}
+	
+	@Override
+	public void setItems(List<Item> items) {
+		this.items = new ArrayList<>(items);
 	}
 }

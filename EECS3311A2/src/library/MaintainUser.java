@@ -35,7 +35,6 @@ public class MaintainUser implements UserDatabase{
 			user.setEmail(reader.get("email"));
 			user.setPassword(reader.get("password"));
 			users.add(user);
-			System.out.println(user.getEmail());
 		}
 	}
 	
