@@ -13,6 +13,20 @@ public class MaintainItems implements ItemDatabase {
 	private List<Item> items = new ArrayList<Item>();
 	private String path;
 	private SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
+	private static MaintainItems database = null;
+	
+	//private constructor
+	private MaintainItems() {
+        
+    }
+	
+	//allows only 1 instance of maintainItems, singleton pattern
+	public static ItemDatabase getInstance() {
+		if (database == null) {
+			database = new MaintainItems();
+		}
+		return database;
+	}
 	
 	@Override
 	public void load(String path) throws Exception{
