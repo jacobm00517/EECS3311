@@ -4,7 +4,7 @@ import java.util.*;
 
 public class MaintainUserProxy implements UserDatabase {
 	
-	private static UserDatabase maintainUser = new MaintainUser();
+	private static UserDatabase maintainUser = MaintainUser.getInstance();
 	private static List<User> users = new ArrayList<User>();
 
 	private void initializeProxy() throws Exception {
