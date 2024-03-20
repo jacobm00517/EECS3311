@@ -12,7 +12,7 @@ import com.csvreader.CsvWriter;
 public class MaintainItemsProxy implements ItemDatabase {
 	private String path;
 	private SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
-	private static ItemDatabase itemDatabase = new MaintainItems();
+	private static ItemDatabase itemDatabase = MaintainItems.getInstance();
 	private static ArrayList<Item> items = new ArrayList<Item>();
 
 	private void initializeProxy() throws Exception {
