@@ -1,6 +1,15 @@
 package library;
 
+import java.util.ArrayList;
+
+/**
+ * NOTE: updateTextbooks() not used here
+ */
+
 public class Faculty extends UserType {
+	// Variables
+	private ArrayList<Course> courses = new ArrayList<Course>();
+	private ArrayList<Book> prevTextbooks = new ArrayList<Book>();
 
 	public Faculty() {
 		// TODO Auto-generated constructor stub
@@ -51,6 +60,22 @@ public class Faculty extends UserType {
 	public String toString() {
 		// TODO Auto-generated method stub
 		return super.toString();
+	}
+	
+	public void addBookItem(Book bookItem) {
+		prevTextbooks.add(bookItem);
+	}
+	
+	public void addCourse(Course course) {
+		courses.add(course);
+	}
+	
+	public ArrayList<Course> getCourses() {
+		return courses;
+	}
+	
+	public ArrayList<Book> getBookItems() {
+		return prevTextbooks;
 	}
 
 }

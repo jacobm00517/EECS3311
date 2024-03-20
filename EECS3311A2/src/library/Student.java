@@ -1,7 +1,13 @@
 package library;
 
-public class Student extends UserType {
+import java.util.ArrayList;
+import java.util.List;
 
+public class Student extends UserType {
+	// Variables
+	private ArrayList<Course> courses = new ArrayList<>();
+	private ArrayList<Book> courseTextbooks = new ArrayList<>();
+	
 	public Student() {
 		// TODO Auto-generated constructor stub
 	}
@@ -53,6 +59,20 @@ public class Student extends UserType {
 		return super.toString();
 	}
 	
+	public void addBookItem(Book bookItem) {
+		courseTextbooks.add(bookItem);
+	}
 	
+	public void addCourse(Course course) {
+		courses.add(course);
+	}
+	
+	public ArrayList<Course> getCourses() {
+		return courses;
+	}
+	
+	public ArrayList<Book> getBookItems() {
+		return courseTextbooks;
+	}
 
 }
