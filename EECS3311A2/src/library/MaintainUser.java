@@ -9,6 +9,18 @@ import com.csvreader.CsvWriter;
 public class MaintainUser implements UserDatabase{
 	private List<User> users = new ArrayList<User>();
 	private String path;
+	private static MaintainUser database = null;
+	
+	private MaintainUser() {
+        
+    }
+	
+	public static UserDatabase getInstance() {
+		if (database == null) {
+			database = new MaintainUser();
+		}
+		return database;
+	}
 	
 	@Override
 	public void load(String path) throws Exception{
