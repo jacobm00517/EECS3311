@@ -6,7 +6,6 @@ public abstract class User {
 	private String password;
 	
 	public User(String userType, String email, String password) {
-		super();
 		this.userType = userType;
 		this.email = email;
 		this.password = password;

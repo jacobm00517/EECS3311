@@ -3,10 +3,13 @@ package library;
 import java.util.regex.*;
 import javax.mail.internet.*;
 
-public interface Facade {
+public class Facade {
+
+	private static User userL;
+
 
 	//to make a user from registering
-	public static String makeUser (String userType, String email, String password) {
+	public String makeUser (String userType, String email, String password) {
 		User newUnregisteredUser;
 		if (false==userTypeValid(userType)) {
 			return "<html>Pick one of the following user types:<br/>student, faculty, non-faculty, or visitor</html>";
@@ -32,7 +35,7 @@ public interface Facade {
 	}
 
 	
-	public static boolean passwordValid(String password)
+	public boolean passwordValid(String password)
     {
  
         // Regex to check valid password.
@@ -60,7 +63,7 @@ public interface Facade {
         return m.matches();
     }
 
-	public static boolean emailValid(String email) {
+	public boolean emailValid(String email) {
 		   boolean result = true;
 		   try {
 		      InternetAddress emailAddr = new InternetAddress(email);
@@ -71,9 +74,8 @@ public interface Facade {
 		   return result;
 		}
 
-	public static boolean userTypeValid(String userType) {
+	public boolean userTypeValid(String userType) {
 		if ("student".equals(userType)||"faculty".equals(userType)||"non-faculty".equals(userType)||"visitor".equals(userType)) {
-			System.out.println("student".equals(userType));
 			return true;
 		}
 		else {
@@ -81,7 +83,7 @@ public interface Facade {
 		}
 	}
 
-	public static String addToDatabase(User newUser) {
+	public String addToDatabase(User newUser) {
 		if (newUser.getuserType().equals("visitor")) {
 			String path = pathNames.path;
     		UserDatabase maintain = new MaintainUserProxy();
@@ -115,6 +117,54 @@ public interface Facade {
 			}
 			return "Please wait for admin approval.";
 		}
+	}
+
+
+	public User loginUser(String email, char[] password) {
+		String passwordString = new String(password);
+		UserDatabase prox = new MaintainUserProxy();
+		
+		User u = null;
+		try {
+			prox.load(pathNames.path);
+			u = prox.getRegisteredUserByEmail(email);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		if (u.getPassword().equals(passwordString)) {
+			this.userL = u;
+			return u;
+		}
+		else{
+			return null;
+		}
+
+	}
+
+	public User getUser(){
+		return Facade.userL;
+	}
+
+	public void initializeGUI(){
+		
+		if (Facade.userL.getuserType().equals("student")){
+			new MainFrame(this.userL);
+		}
+		else if (Facade.userL.getuserType().equals("faculty")){
+			new MainFrame(this.userL);
+		}
+		else if (Facade.userL.getuserType().equals("non-faculty")){
+			new MainFrame(this.userL);
+		}
+		else if (Facade.userL.getuserType().equals("non-faculty")){
+			new MainFrame(this.userL);
+		}
+		else if (Facade.userL.getuserType().equals("admin")) {
+			new AdminFrame(this.userL);
+		}
+
+		
 	}
 
 }

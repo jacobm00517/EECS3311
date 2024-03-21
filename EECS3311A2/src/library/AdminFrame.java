@@ -2,24 +2,20 @@ package library;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.util.Arrays;
 import javax.swing.*;
 
-public class MainFrame extends JFrame {
+public class AdminFrame extends JFrame {
 
 	private User user;
 	private Account account;
 	
-	final JButton homeButton = new JButton("Items");
-	final JButton subsButton = new JButton("Subscriptions");
-	final JButton coursesButton = new JButton("Courses");
-	final JButton searchButton = new JButton("Book Search");
-	final JButton requestButton = new JButton("Requests");
-	final JButton discountButton = new JButton("Discounted items");
+	final JButton homeButton = new JButton("Unregistered Users");
+	final JButton itemButton = new JButton("Items");
+	final JButton addItemsButton = new JButton("Add an Item");
+	final JButton requestButton = new JButton("Book Requests");
 	final JButton exitApp = new JButton("Exit app");
 	
 	private JPanel east;
-	private JPanel search;
 	private Component current;
 	
 	//east
@@ -43,7 +39,7 @@ public class MainFrame extends JFrame {
 	
 	
 	
-	public MainFrame(User u) {
+	public AdminFrame(User u) {
 		this.user = u;
 		this.account = new Account(u);
 		notifications = new JTextArea(account.getNotifications());
@@ -51,7 +47,7 @@ public class MainFrame extends JFrame {
 
 		this.setVisible(true);
 	    this.getContentPane().setBackground(Color.WHITE);
-	    this.setTitle("Yorku Library Home");
+	    this.setTitle("Yorku Library Admin");
 	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    this.setLocationRelativeTo(null);
 	    this.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -59,14 +55,12 @@ public class MainFrame extends JFrame {
 	    
 	    JPanel buttons = new JPanel();
 	    buttons.add(homeButton);
-	    buttons.add(subsButton);
-	    buttons.add(coursesButton);
-	    buttons.add(searchButton);
+        buttons.add(itemButton);
+        buttons.add(addItemsButton);
 	    buttons.add(requestButton);
-	    buttons.add(discountButton);
 	    buttons.add(exitApp);
 	    buttons.setLayout(new BoxLayout(buttons, BoxLayout.Y_AXIS));
-		buttons.setBackground(Color.DARK_GRAY);
+	    buttons.setBackground(Color.DARK_GRAY);
 	    
 	    
 	    
@@ -87,42 +81,11 @@ public class MainFrame extends JFrame {
 	        }
 	    });
 	    
-	    subsButton.addActionListener(new ActionListener() {
-	        @Override
-	        public void actionPerformed(ActionEvent e) {
-	        	
-	            subs();
-	        }
-	    });
-	    
-	    coursesButton.addActionListener(new ActionListener() {
-	        @Override
-	        public void actionPerformed(ActionEvent e) {
-	            courses();
-	            
-	        }
-	    });
-
-	    searchButton.addActionListener(new ActionListener() {
-	        @Override
-	        public void actionPerformed(ActionEvent e) {
-	            searchFrame();
-	            
-	        }
-	    });
 	    
 	    requestButton.addActionListener(new ActionListener() {
 	        @Override
 	        public void actionPerformed(ActionEvent e) {
 	            requests();
-	            
-	        }
-	    });
-	    
-	    discountButton.addActionListener(new ActionListener() {
-	        @Override
-	        public void actionPerformed(ActionEvent e) {
-	            discounts();
 	            
 	        }
 	    });
@@ -187,52 +150,6 @@ public class MainFrame extends JFrame {
 		
 	}
 	
-	private void subs() {
-		this.remove(this.current);
-	    this.setTitle("Yorku Library Subscriptions");
-	    
-	    JPanel subs = new JPanel();
-	    subs.setBackground(Color.LIGHT_GRAY);
-	    subs.add(subscriptionsList);
-	    
-	    this.add(subs);
-	    this.validate();
-	    this.current=subs;
-	}
-	
-	private void courses() {
-		this.remove(this.current);
-	    this.setTitle("Yorku Library Courses");
-	    
-	    JPanel courses = new JPanel();
-	    courses.setBackground(Color.LIGHT_GRAY);
-	    courses.add(this.courseList);
-	    
-	    
-	    this.add(courses);
-	    this.validate();
-	    this.current=courses;
-	}
-	
-	public void searchFrame() {
-		this.remove(this.current);
-	    this.setTitle("Yorku Library Search");
-	    
-	    buttonSearch.setBounds(10,80,80,25);
-	    
-	    this.search = new JPanel();
-	    
-	    this.search.setBackground(Color.LIGHT_GRAY);
-	    
-	    this.search.add(searchLabel);
-	    this.search.add(searchText);
-	    this.search.add(buttonSearch);
-	    this.search.add(searchStatus);
-	    
-	    this.add(search);
-	    this.validate();
-	    this.current=this.search;
-	}
 	
 	private void requests() {
 		this.remove(this.current);
@@ -250,19 +167,6 @@ public class MainFrame extends JFrame {
 		
 	}
 	
-	private void discounts() {
-		this.remove(this.current);
-	    this.setTitle("Yorku Library Home");
-	    
-	    JPanel discounts = new JPanel();
-	    discounts.setBackground(Color.LIGHT_GRAY);
-	    discounts.add(discountItems);
-	    
-	    this.add(discounts);
-	    this.validate();
-	    this.current=discounts;
-		
-	}
 	
 
 
