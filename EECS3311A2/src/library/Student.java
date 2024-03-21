@@ -19,7 +19,6 @@ public class Student extends UserType {
 
 	@Override
 	public String getuserType() {
-		// TODO Auto-generated method stub
 		return super.getuserType();
 	}
 

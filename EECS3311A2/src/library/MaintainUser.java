@@ -30,7 +30,10 @@ public class MaintainUser implements UserDatabase{
 		
 		while(reader.readRecord()){ 
 			User user;
-			if (reader.get("userType").equals("student")) {
+			if (reader.get("userType").equals("admin")) {
+				user = new Admin();
+			}
+			else if (reader.get("userType").equals("student")) {
 				user = new Student();
 			}
 			else if (reader.get("userType").equals("faculty")) {

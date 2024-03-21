@@ -14,6 +14,7 @@ public class LoginFrame extends JFrame {
         passDialog.setVisible(true);
     }
 
+
     public static void main(String[] args) {
     	
         SwingUtilities.invokeLater(new Runnable() {
@@ -22,7 +23,8 @@ public class LoginFrame extends JFrame {
                 JFrame mainFrame = new LoginFrame();
                 mainFrame.setVisible(false);
                 mainFrame.dispose();
-                new MainFrame();
+                Facade f = new Facade();
+                f.initializeGUI();
             }
             
         });
@@ -46,6 +48,7 @@ class PassWordDialog extends JDialog {
     private final JButton buttonRegister = new JButton("Register");
 
     private final JLabel jlblStatus = new JLabel(" ");
+
 
     public PassWordDialog() {
         this(null, true);
@@ -100,13 +103,14 @@ class PassWordDialog extends JDialog {
         buttonOk.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (Arrays.equals("p".toCharArray(), passwordField.getPassword())
-                        && "e".equals(emailField.getText())) {
+                Facade f = new Facade();
+                if (f.loginUser(emailField.getText(), passwordField.getPassword())==null){
+                    jlblStatus.setText("Invalid username or password");
+                } else {
                     parent.setVisible(true);
                     setVisible(false);
-                } else {
-                    jlblStatus.setText("Invalid username or password");
                 }
+                
             }
         });
         buttonCancel.addActionListener(new ActionListener() {
@@ -120,7 +124,8 @@ class PassWordDialog extends JDialog {
         buttonRegister.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	jlblStatus.setText(Facade.makeUser(userTypeField.getText(), emailField.getText(), new String(passwordField.getPassword())));
+                Facade f = new Facade();
+            	jlblStatus.setText(f.makeUser(userTypeField.getText(), emailField.getText(), new String(passwordField.getPassword())));
                 
             }
         });

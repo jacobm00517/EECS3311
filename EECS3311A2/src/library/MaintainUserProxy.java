@@ -25,7 +25,6 @@ public class MaintainUserProxy implements UserDatabase {
 	public User getRegisteredUserByEmail(String email) throws Exception {
 		initializeProxy();
 		for (User u : users) {
-			System.out.println(u.getEmail());
 			if (u.getEmail().equals(email)) {
 				return u;
 			}
