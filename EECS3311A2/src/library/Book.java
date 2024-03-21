@@ -11,6 +11,7 @@ public class Book implements Item {
 	private String ID;
 	private String location;
 	private String publisher;
+	private String edition; 
 
 	// ----- rentable attributes ------
 	private boolean rentable;
@@ -36,7 +37,7 @@ public class Book implements Item {
 
 		// jacobs constructor
 		public Book(String itemType, String title, String iD, String location, boolean rentable, Date borrowedDate,
-				Date dueDate, User owner, String publisher, Double cost) {
+				Date dueDate, User owner, String publisher, Double cost, String edition) {
 			super();
 			this.itemType = itemType;
 			this.title = title;
@@ -50,6 +51,8 @@ public class Book implements Item {
 			this.dueDate = dueDate;
 			this.owner = owner;
 			this.cost = cost;
+			
+			this.edition=edition;
 		}
 
 		// ------ RENTING SETTERS ---- THE LOGIC FOR REQUIREMENTS
@@ -213,6 +216,14 @@ public class Book implements Item {
 		@Override
 		public void setPublisher(String publisher) {
 			this.publisher = publisher;
+		}
+
+		
+		public String getEdition() {
+			return edition;
+		}
+		public void setEdition(String edition) {
+			this.edition = edition;
 		}
 
 }

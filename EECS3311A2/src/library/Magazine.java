@@ -11,6 +11,7 @@ public class Magazine implements Item {
 	private String ID;
 	private String location;
 	private String publisher;
+	private String edition; 
 
 	// ----- rentable attributes ------
 	private boolean rentable;
@@ -186,6 +187,18 @@ public class Magazine implements Item {
 			@Override
 			public void setPublisher(String publisher) {
 				this.publisher = publisher;
+			}
+
+			@Override
+			public void setEdition(String string) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public String getEdition() {
+				
+				return null;
 			}
 
 }

@@ -40,6 +40,9 @@ public interface Item {
 	void setCost(Double cost);
 	void calcCost(Date time);
 	void considerIfLost(Date time);
+	
+	void setEdition(String string);
+	String getEdition();
 
 
 	
