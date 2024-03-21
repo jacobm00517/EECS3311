@@ -13,6 +13,11 @@ public class NewsletterSystem {
 	}
 	
 	
+	public NewsletterSystem() {
+		// TODO Auto-generated constructor stub
+	}
+
+
 	//getters
 	public String getCompany() {
 		return company;

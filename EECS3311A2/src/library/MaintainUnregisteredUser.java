@@ -3,6 +3,8 @@ import java.io.File;
 
 import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.List;
+
 import com.csvreader.CsvReader;
 import com.csvreader.CsvWriter;
 
@@ -10,7 +12,8 @@ public class MaintainUnregisteredUser {
 	public ArrayList<User> users = new ArrayList<User>();
 	public String path;
 	
-	public void load(String path) throws Exception{
+	public void load(String path) throws Exception {
+		
 		CsvReader reader = new CsvReader(path); 
 		reader.readHeaders();
 		
@@ -35,6 +38,7 @@ public class MaintainUnregisteredUser {
 			user.setEmail(reader.get("email"));
 			user.setPassword(reader.get("password"));
 			users.add(user);
+			
 		}
 	}
 	
@@ -91,6 +95,16 @@ public class MaintainUnregisteredUser {
 		
 		update(path);
 	}
+	
+	public List<User> getUsers(){
+		return this.users;
+	}
+	public void setUsers(List<User> users) {
+		this.users = new ArrayList<>(users);
+	}
+	
+	
+	
 	/*public static void main(String [] args) throws Exception{
 		String path = "/Users/jacobabarrota/Downloads/CSV_Example/URuser.csv";
 		MaintainUnregisteredUser maintain = new MaintainUnregisteredUser();
