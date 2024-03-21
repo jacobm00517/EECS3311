@@ -90,7 +90,6 @@ public class MaintainUser implements UserDatabase{
 		return null;
 	}
 	
-	
 	@Override
 	public void addUser(User user) {
 		users.add(user);

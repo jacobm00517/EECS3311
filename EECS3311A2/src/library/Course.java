@@ -55,7 +55,7 @@ public class Course {
 	public void setStudents(ArrayList<User> students) {
 		this.students = students;
 	}
-
+	
 	public String getSubject() {
 		return subject;
 	}
