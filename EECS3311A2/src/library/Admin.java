@@ -2,6 +2,7 @@ package library;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Admin extends User {
 	private ArrayList<Request> requestList = new ArrayList<Request>();
@@ -15,6 +16,11 @@ public class Admin extends User {
 	public Admin(String userType, String email, String password) {
 		super(userType, email, password);
 		// TODO Auto-generated constructor stub
+	}
+
+	public List<Item> getItems(){
+		ItemDatabase itemDB = new MaintainItemsProxy();
+		return itemDB.getItems();
 	}
 
 	// req7

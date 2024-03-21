@@ -74,4 +74,6 @@ public class Account {
         }
         return urgentNotifications + notifications;
     }
+
+
 }
