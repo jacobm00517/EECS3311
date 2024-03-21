@@ -2,6 +2,8 @@ package library;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+
 import javax.swing.*;
 
 public class AdminFrame extends JFrame {
@@ -19,7 +21,6 @@ public class AdminFrame extends JFrame {
 	private Component current;
 	
 	//east
-	private JTextArea notifications;
 	
 	private JTextArea subscriptionsList = new JTextArea("BlahBlahBlahBalH subscriptions\n");
 	
@@ -42,7 +43,6 @@ public class AdminFrame extends JFrame {
 	public AdminFrame(User u) {
 		this.user = u;
 		this.account = new Account(u);
-		notifications = new JTextArea(account.getNotifications());
 
 
 		this.setVisible(true);
@@ -67,7 +67,6 @@ public class AdminFrame extends JFrame {
 	    this.east = new JPanel(new FlowLayout());
 	    this.east.setBackground(Color.LIGHT_GRAY);
 	    this.current = this.east;
-	    this.east.add(notifications);
 	    
 	    this.setLayout(new BorderLayout());
 	    this.add(buttons, BorderLayout.WEST);
@@ -78,6 +77,14 @@ public class AdminFrame extends JFrame {
 	        public void actionPerformed(ActionEvent e) {
 	        	
 	            east();
+	        }
+	    });
+
+        itemButton.addActionListener(new ActionListener() {
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	        	
+	            item();
 	        }
 	    });
 	    
@@ -139,14 +146,28 @@ public class AdminFrame extends JFrame {
 		this.remove(this.current);
 	    this.setTitle("Yorku Library Home");
 	    
+
 	    this.east = new JPanel(new FlowLayout());
 	    this.east.setBackground(Color.LIGHT_GRAY);
-	    this.east.add(notifications);
 	    
 
 	    this.add(this.east);
 	    this.validate();
 	    this.current=this.east;
+		
+	}
+
+    private void item() {
+		this.remove(this.current);
+	    this.setTitle("Yorku Library Items");
+	    
+	    JPanel items = new JPanel();
+	    this.east.setBackground(Color.LIGHT_GRAY);
+	    
+
+	    this.add(items);
+	    this.validate();
+	    this.current=items;
 		
 	}
 	

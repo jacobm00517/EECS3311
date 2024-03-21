@@ -7,7 +7,7 @@ import javax.swing.*;
 
 //MainFrame is a StudentFrame
 
-public class MainFrame extends JFrame {
+public class FacultyFrame extends JFrame {
 
 	private User user;
 	private Account account;
@@ -45,7 +45,7 @@ public class MainFrame extends JFrame {
 	
 	
 	
-	public MainFrame(User u) {
+	public FacultyFrame(User u) {
 		this.user = u;
 		this.account = new Account(u);
 		notifications = new JTextArea(account.getNotifications());
