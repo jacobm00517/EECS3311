@@ -39,34 +39,41 @@ public class Account {
 
 
         for (Item i : items){
-            Calendar today = Calendar.getInstance();
-            today.setTime(new Date());
-
-            Calendar calDueDate = Calendar.getInstance();
-            calDueDate.setTime(i.getDueDate());
-
-            //24 hours before due date
-            Calendar calDueDate24 = Calendar.getInstance();
-            calDueDate24.setTime(i.getDueDate());
-            calDueDate24.add(Calendar.DAY_OF_MONTH, -1);
-
-            //24 hours before due date
-            Calendar calLostDate = Calendar.getInstance();
-            calLostDate.setTime(i.getDueDate());
-            calLostDate.add(Calendar.DAY_OF_MONTH, 15);
-
-            if(today.after(calDueDate24)&&today.before(calDueDate)){
-                urgentNotifications += "\n"+"Rented item: "+ i.getTitle() + " is due in less than 24 hours.";
+            //checks if object has a due date, prevents purchased objects from causing issues
+        	if(i.getDueDate() == null) {
+            
             }
-            else if (today.after(calDueDate)&&today.before(calLostDate)) {
-                urgentNotifications += "\n"+"Rented item: "+ i.getTitle() + " is overdue";
-            }
-            else if (today.after(calLostDate)){
-                urgentNotifications += "\n" +"Rented item: "+ i.getTitle() + " is lost";
-            }
+            else {
+            	
+            	Calendar today = Calendar.getInstance();
+                today.setTime(new Date());
+
+                Calendar calDueDate = Calendar.getInstance();
+                calDueDate.setTime(i.getDueDate());
+
+                //24 hours before due date
+                Calendar calDueDate24 = Calendar.getInstance();
+                calDueDate24.setTime(i.getDueDate());
+                calDueDate24.add(Calendar.DAY_OF_MONTH, -1);
+
+                //24 hours before due date
+                Calendar calLostDate = Calendar.getInstance();
+                calLostDate.setTime(i.getDueDate());
+                calLostDate.add(Calendar.DAY_OF_MONTH, 15);
+
+                if(today.after(calDueDate24)&&today.before(calDueDate)){
+                    urgentNotifications += "\n"+"Rented item: "+ i.getTitle() + " is due in less than 24 hours.";
+                }
+                else if (today.after(calDueDate)&&today.before(calLostDate)) {
+                    urgentNotifications += "\n"+"Rented item: "+ i.getTitle() + " is overdue";
+                }
+                else if (today.after(calLostDate)){
+                    urgentNotifications += "\n" +"Rented item: "+ i.getTitle() + " is lost";
+                }
 
 
-            notifications += "\n"+"Rented item: "+ i.getTitle() +"     Due: "+formatter.format(i.getDueDate());
+                notifications += "\n"+"Rented item: "+ i.getTitle() +"     Due: "+formatter.format(i.getDueDate());
+            }
         }
 
         if (urgentNotifications.equals("URGENT DUE DATES:")) {
@@ -74,6 +81,4 @@ public class Account {
         }
         return urgentNotifications + notifications;
     }
-
-
 }
