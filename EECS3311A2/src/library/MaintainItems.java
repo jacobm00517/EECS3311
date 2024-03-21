@@ -9,7 +9,7 @@ import java.util.List;
 import com.csvreader.CsvReader;
 import com.csvreader.CsvWriter;
 
-public class MaintainItems implements ItemDatabase {
+	public class MaintainItems implements ItemDatabase {
 	private List<Item> items = new ArrayList<Item>();
 	private String path;
 	private SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
@@ -37,6 +37,7 @@ public class MaintainItems implements ItemDatabase {
 			Item item;
 			if (reader.get("item").equals("book")) {
 				item = new Book();
+				
 			}
 			else if (reader.get("item").equals("CD")) {
 				item = new CD();
@@ -71,7 +72,10 @@ public class MaintainItems implements ItemDatabase {
 			item.setDueDate(formatter.parse(reader.get("dueDate")));
 			double d = Double.parseDouble(reader.get("cost"));
 			item.setCost(d);
+			item.setEdition(reader.get("edition"));
+			
 			items.add(item);
+			
 		}
 	}
 	
@@ -90,6 +94,7 @@ public class MaintainItems implements ItemDatabase {
 				csvOutput.write("borrowedDate");
 				csvOutput.write("dueDate");
 				csvOutput.write("cost");
+				csvOutput.write("edition");
 				csvOutput.endRecord();
 
 				// else assume that the file already has the correct header line
@@ -105,6 +110,7 @@ public class MaintainItems implements ItemDatabase {
 					csvOutput.write(formatter.format(i.getBorrowedDate()));
 					csvOutput.write(formatter.format(i.getDueDate()));
 					csvOutput.write(i.getCost().toString());
+					csvOutput.write(i.getEdition());
 					csvOutput.endRecord();
 				}
 				csvOutput.close();

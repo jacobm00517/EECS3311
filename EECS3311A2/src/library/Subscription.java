@@ -1,43 +1,83 @@
 package library;
 
+import java.util.Date;
+
 public class Subscription {
 	
 
 	private User u; 
-	//^^ this isnt necessary because the user will own a list of subscription objects 
-	
-	private NewsletterSystem subscribedTo;
-	private boolean status;
+	private String site;
+	private String companyName;
+	private boolean status; // will return as string when "isstatus", is str in .csv
 
 
-	public Subscription(NewsletterSystem n, User u) {
+	public Subscription(String site, String companyName, User u, boolean status) {
 
-		this.u = u;
-		// ^^ this isnt necessary because the user will own a list of subscription objects
-		
-		this.subscribedTo = n;
+		this.setU(u);
+		this.site = site;
+		this.companyName = companyName;
 		status = true;
 
 	}
 
-	// getter
-	public NewsletterSystem getSubscribedTo() {
-		return subscribedTo;
+	//default
+	public Subscription() {
+		
+		
 	}
-	public boolean isStatus() {
-		return status;
+
+	// getter
+	public String isStatus() {
+		if (this.status == true) {
+			return "true";
+		}
+		else {
+			return "false";
+		}
 	}
 	
 	
 	// setter
 	// req: unsubscribe [boolean= false]
-	public void setStatus(boolean status) {
-		this.status = status;
+	public void setStatus(String string) {
+		if (string.equals("true")) {
+			this.status = true;
+		}
+		else {
+			this.status = false;
+		}
 	}
 
-	//  no need for other setter. we dont change it after made.
-	public void setSubscribedTo(NewsletterSystem subscribedTo) {
-		this.subscribedTo = subscribedTo;
+	public User getU() {
+		return u;
 	}
+	public void setU(User u) {
+		this.u = u;
+	}
+
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+
+	public String getSite() {
+		return site;
+	}
+
+	public void setSite(String site) {
+		this.site = site;
+	}
+	
+
+	
+//	public void setSubscribedTo(NewsletterSystem subscribedTo) {
+//	this.subscribedTo = subscribedTo;
+//}
+//public NewsletterSystem getSubscribedTo() {
+//return subscribedTo;
+//}
 
 }

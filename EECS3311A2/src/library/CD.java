@@ -11,6 +11,7 @@ public class CD implements Item {
 	private String ID;
 	private String location;
 	private String publisher;
+	private String edition; 
 
 	// ----- rentable attributes ------
 	private boolean rentable;
@@ -188,5 +189,17 @@ public class CD implements Item {
 	@Override
 	public void setPublisher(String publisher) {
 		this.publisher = publisher;
+	}
+
+	@Override
+	public void setEdition(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getEdition() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
