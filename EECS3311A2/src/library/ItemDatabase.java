@@ -17,6 +17,8 @@ public interface ItemDatabase {
 
 	Item getItemByID(String ID);
 
+	Item getItemByTitle(String title);
+
 	List<Item> getItems();
 
 	void setItems(List<Item> items);

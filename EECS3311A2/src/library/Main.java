@@ -109,6 +109,22 @@ public class Main {
         calBDate.setTime(new Date());
 		System.out.println(calBDate.toString());
 
+		CourseDatabase courseDB = new MaintainCoursesProxy();
+
+
+		User admin = prox.getRegisteredUserByEmail("admin@yorku.ca");
+		User faculty = prox.getRegisteredUserByEmail("faculty1@gmail.com");
+		ArrayList<User> students = new ArrayList<User>();
+		students.add(prox.getRegisteredUserByEmail("student@gmail.com"));
+		students.add(prox.getRegisteredUserByEmail("student1@gmail.com"));
+		students.add(prox.getRegisteredUserByEmail("student2@gmail.com"));
+		Item courseBook = new Book("Book", "Chemistry1", "2", "www.url.com", false, new Date(), new Date(), admin, "Wiley", 0.00, "7");
+		//subject,coursecode,startdate,enddate,textbook,faculty,students
+		Course course1 = new Course("chem","3001",formatter.parse("06/01/2024 00:55:11"),formatter.parse("26/04/2024 00:55:11"),courseBook,faculty,students);
+		courseDB.load();
+		courseDB.addCourse(course1);
+		courseDB.update();
+
 	}
 
 }

@@ -9,16 +9,16 @@ public class Course {
 	public String courseCode;
 	public Date startDate;
 	public Date endDate;
-	public Book textbooks;
-	public Faculty professorFaculty;
-	public ArrayList<Student> students;
+	public Item textbooks;
+	public User professorFaculty;
+	public ArrayList<User> students;
 
 	public Course() {
 		
 	}
 	
-	public Course(String subject, String courseCode, Date startDate, Date endDate, Book textbooks,
-			Faculty professorFaculty, ArrayList<Student> students) {
+	public Course(String subject, String courseCode, Date startDate, Date endDate, Item textbooks,
+			User professorFaculty, ArrayList<User> students) {
 		this.subject = subject;
 		this.courseCode = courseCode;
 		this.startDate = startDate;
@@ -44,16 +44,52 @@ public class Course {
 		this.endDate = endDate;
 	}
 
-	public void setTextbooks(Book textbooks) {
+	public void setTextbooks(Item textbooks) {
 		this.textbooks = textbooks;
 	}
 
-	public void setProfessorFaculty(Faculty professorFaculty) {
+	public void setFaculty(User professorFaculty) {
 		this.professorFaculty = professorFaculty;
 	}
 
-	public void setStudents(ArrayList<Student> students) {
+	public void setStudents(ArrayList<User> students) {
 		this.students = students;
+	}
+
+	public String getSubject() {
+		return subject;
+	}
+
+	public String getCourseCode() {
+		return courseCode;
+	}
+
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public Item getTextbooks() {
+		return textbooks;
+	}
+
+	public User getProfessorFaculty() {
+		return professorFaculty;
+	}
+
+	public ArrayList<User> getStudents() {
+		return students;
+	}
+
+	public String getStudentsToString(){
+		String students = "";
+		for (User s : getStudents()){
+			students+=s.getEmail()+",";
+		}
+		return students;
 	}
 	
 }

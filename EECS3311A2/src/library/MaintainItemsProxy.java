@@ -63,4 +63,11 @@ public class MaintainItemsProxy implements ItemDatabase {
 	public void setItems(List<Item> items) {
 		this.items = new ArrayList<>(items);
 	}
+
+	@Override
+	public Item getItemByTitle(String title) {
+		return itemDatabase.getItemByTitle(title);
+	}
+
+	
 }
