@@ -144,4 +144,14 @@ import com.csvreader.CsvWriter;
 	public void setItems(List<Item> items) {
 		this.items = new ArrayList<>(items);
 	}
+
+	@Override
+	public Item getItemByTitle(String title) {
+		for (Item i : this.items){
+			if (title.equals(i.getTitle())){
+				return i;
+			}
+		}
+		return null;
+	}
 }
