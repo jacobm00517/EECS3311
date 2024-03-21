@@ -13,13 +13,16 @@ public class Main {
 
 	public static void main(String[] args) throws Exception {
 		
-		UserDatabase prox = new MaintainUserProxy();
+		UserDatabase prox = MaintainUser.getInstance();
 		
 		prox.load(pathNames.path);
 		
-		User user3;
+		User user3 = new Student("student", "email@gmail.com", "paass");
 		
-		user3 = prox.getRegisteredUserByEmail("student1@gmail.com");
+		prox.addUser(user3);
+
+		prox.update();
+
 		/*
 		System.out.println(user3.getEmail());
 		
