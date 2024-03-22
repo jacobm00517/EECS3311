@@ -36,11 +36,21 @@ public interface Item {
 	String getPublisher();
 	void setPublisher(String publisher);
 
+	boolean isPurchasable();
+	void setPurchasable(String purchasable);
+	String getPurchasable();
+
+	boolean isOnDiscount();
+	void setOnDiscount(String onDiscount);
+	String getOnDiscount();
+
 	Double getCost();
 	void setCost(Double cost);
 	void calcCost(Date time);
 	void considerIfLost(Date time);
-	
+
+	boolean getIfLost();
+
 	void setEdition(String string);
 	String getEdition();
 

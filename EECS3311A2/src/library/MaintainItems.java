@@ -95,6 +95,8 @@ import com.csvreader.CsvWriter;
 				csvOutput.write("dueDate");
 				csvOutput.write("cost");
 				csvOutput.write("edition");
+				csvOutput.write("purchasable");
+				csvOutput.write("onDiscount");
 				csvOutput.endRecord();
 
 				// else assume that the file already has the correct header line
@@ -111,6 +113,8 @@ import com.csvreader.CsvWriter;
 					csvOutput.write(formatter.format(i.getDueDate()));
 					csvOutput.write(i.getCost().toString());
 					csvOutput.write(i.getEdition());
+					csvOutput.write(i.getPurchasable());
+					csvOutput.write(i.getOnDiscount());
 					csvOutput.endRecord();
 				}
 				csvOutput.close();
