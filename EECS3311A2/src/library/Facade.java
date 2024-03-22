@@ -5,8 +5,7 @@ import java.util.regex.*;
 import javax.mail.internet.*;
 
 public class Facade {
-	public static Search search = new Search();
-	public static DiscountOffers discount = new DiscountOffers();
+	Context context = null;
 	private static User userL;
 
 
@@ -171,11 +170,14 @@ public class Facade {
 	}
 
 	public static List<Item> search(String input, ItemDatabase items){
-		return search.strategyInput(input, items);
+
+		Context context = new Context(new Search());
+		return context.strategyInput(input, items);
 	}
 
 	public static List<Item> discountOffers(String input, ItemDatabase items){
-		return discount.strategyInput(input, items);
+		Context context = new Context(new DiscountOffers());
+		return context.strategyInput(input, items);
 	}
 
 }
