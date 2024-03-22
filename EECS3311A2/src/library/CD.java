@@ -23,6 +23,10 @@ public class CD implements Item {
 	private Date lostDay;
 	private boolean isLost; // the purpose of this var is to show item is unrentable bc it is lost
 
+	// manages permanent items and discounts
+	private boolean purchasable;
+	private boolean onDiscount;
+
 	// ----- req 7 -----
 //	private boolean isPurchasable;
 //	private Double price;
@@ -36,18 +40,23 @@ public class CD implements Item {
 
 		Calendar c = Calendar.getInstance(); 	// the date import cannot do everything by itself. 
 		// i dont want to change date objects into another type n go thru the mess
-		c.setTime(borrowedDate);
-		c.add(Calendar.MONTH, 1); 				// due +1month after borrow
-		this.dueDate = c.getTime();
+		if(purchasable == false) {
+			c.add(Calendar.MONTH, 1); 				// due +1month after borrow
+			this.dueDate = c.getTime();
 
-		c.add(Calendar.DATE, 15); 				// considered lost +15d after due
-		this.lostDay = c.getTime();
+			c.add(Calendar.DATE, 15); 				// considered lost +15d after due
+			this.lostDay = c.getTime();
+		}
+		else {
+			this.dueDate = null;
+			this.lostDay = null;
+		}
 
 	}
 
 	public void calcCost(Date date) { // CALCULATING FEE
 
-		if (date.after(this.dueDate)) {
+		if ((date.after(this.dueDate)) && (isPurchasable() == false)) {
 
 			considerIfLost(date);
 			if (!isLost) {
@@ -71,8 +80,11 @@ public class CD implements Item {
 
 	}
 	public void considerIfLost(Date date) {
-		if (date.after(lostDay)) {
-			this.isLost = true; 		
+		if (date == null) {
+			this.isLost = false;
+		}
+		else if (date.after(lostDay)) {
+			this.isLost = true;
 			this.rentable = false;
 		}
 	}
@@ -85,11 +97,13 @@ public class CD implements Item {
 	}
 
 	// NO POINT OF THIS SETTER TBH!
+	// Yes there is, some objects can be bought
 	@Override
 	public void setCost(Double cost) { 		
 		this.cost = cost;
 	}
 	// NO POINT ITS CALCULATED BASED ON BORROWED DATE
+	// Yes there is, some objects can be bought
 	@Override
 	public void setDueDate(Date dueDate) {
 		this.dueDate = dueDate;
@@ -189,6 +203,63 @@ public class CD implements Item {
 	@Override
 	public void setPublisher(String publisher) {
 		this.publisher = publisher;
+	}
+
+	@Override
+	public boolean isPurchasable() {
+		return this.purchasable;
+	}
+
+	@Override
+	public void setPurchasable(String purchasable) {
+		if (purchasable.equals("true")) {
+			this.rentable = false;
+			this.dueDate = null;
+			this.lostDay = null;
+			this.purchasable = true;
+		}
+		else {
+			this.purchasable = false;
+		}
+	}
+
+	@Override
+	public String getPurchasable() {
+		if (purchasable == true) {
+			return "true";
+		}
+		else {
+			return "false";
+		}
+	}
+
+	@Override
+	public boolean isOnDiscount() {
+		return this.onDiscount;
+	}
+
+	@Override
+	public void setOnDiscount(String onDiscount) {
+		if (onDiscount.equals("true")) {
+			this.onDiscount = true;
+		}
+		else {
+			this.onDiscount = false;
+		}
+	}
+
+	@Override
+	public String getOnDiscount() {
+		if (onDiscount == true) {
+			return "true";
+		}
+		else {
+			return "false";
+		}
+	}
+	@Override
+	public boolean getIfLost() {
+		return this.isLost;
 	}
 
 	@Override

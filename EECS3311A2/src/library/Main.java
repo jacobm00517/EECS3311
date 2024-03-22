@@ -78,6 +78,25 @@ public class Main {
 
 		System.out.println("student".equals(u.getuserType()));*/
 
+		User newUser = new Student("student", "student@gmail.com", "t4t4");
+
+		prox.addUser(newUser);
+
+		Item book1 = new Book("ItemDBProxyWorks", "Chemistry1", "2", "SteacieBasement", true, new Date(), new Date(), newUser, "Wiley", 0.00, "false", "false", "First");
+		Item book2 = new Book("ItemSearchTest", "Chemistry1", "2", "SteacieBasement", true, new Date(), new Date(), newUser, "Wiley", 0.00, "false", "false", "First");
+		Item book3 = new Book("TestSearch", "Chemistry1", "2", "SteacieBasement", true, new Date(), new Date(), newUser, "Wiley", 0.00, "false", "false", "First");
+
+		book3.setPurchasable("true");
+		book3.setOnDiscount("true");
+
+		ItemDatabase itemDBprox = new MaintainItemsProxy();
+
+		itemDBprox.load(pathNames.itemDBpath);
+
+		itemDBprox.addItem(book1);
+		itemDBprox.addItem(book2);
+		itemDBprox.addItem(book3);
+
 		Account account = new Account(user3);
 		System.out.println(account.getNotifications());
 
@@ -124,6 +143,13 @@ public class Main {
 		courseDB.load();
 		courseDB.addCourse(course1);
 		courseDB.update();
+
+		System.out.println(Facade.search("ItemSearchTest", itemDBprox));
+		System.out.println(Facade.search("Test", itemDBprox));
+		System.out.println(Facade.search("t", itemDBprox));
+		System.out.println(Facade.search("q", itemDBprox));
+
+		System.out.println(Facade.discountOffers("", itemDBprox));
 
 	}
 

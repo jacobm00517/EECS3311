@@ -1,10 +1,12 @@
 package library;
 
+import java.util.List;
 import java.util.regex.*;
 import javax.mail.internet.*;
 
 public class Facade {
-
+	public static Search search = new Search();
+	public static DiscountOffers discount = new DiscountOffers();
 	private static User userL;
 
 
@@ -146,6 +148,7 @@ public class Facade {
 		return Facade.userL;
 	}
 
+	//is this correct?
 	public void initializeGUI(){
 		
 		if (Facade.userL.getuserType().equals("student")){
@@ -165,6 +168,14 @@ public class Facade {
 		}
 
 		
+	}
+
+	public static List<Item> search(String input, ItemDatabase items){
+		return search.strategyInput(input, items);
+	}
+
+	public static List<Item> discountOffers(String input, ItemDatabase items){
+		return discount.strategyInput(input, items);
 	}
 
 }
