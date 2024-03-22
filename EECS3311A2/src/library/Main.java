@@ -82,9 +82,9 @@ public class Main {
 
 		prox.addUser(newUser);
 
-		Item book1 = new Book("ItemDBProxyWorks", "Chemistry1", "2", "SteacieBasement", true, new Date(), new Date(), newUser, "Wiley", 0.00, "false", "false", "First");
-		Item book2 = new Book("ItemSearchTest", "Chemistry1", "2", "SteacieBasement", true, new Date(), new Date(), newUser, "Wiley", 0.00, "false", "false", "First");
-		Item book3 = new Book("TestSearch", "Chemistry1", "2", "SteacieBasement", true, new Date(), new Date(), newUser, "Wiley", 0.00, "false", "false", "First");
+		Item book1 = new Book("ItemDBProxyWorks", "Chemistry1", "2", "SteacieBasement", true, new Date(), new Date(), newUser, "Wiley", 0.00, "false", "false", "1");
+		Item book2 = new Book("ItemSearchTest", "Chemistry1", "2", "SteacieBasement", true, new Date(), new Date(), newUser, "Wiley", 0.00, "false", "false", "1");
+		Item book3 = new Book("TestSearch", "Chemistry1", "2", "SteacieBasement", true, new Date(), new Date(), newUser, "Wiley", 0.00, "false", "false", "1");
 
 		book3.setPurchasable("true");
 		book3.setOnDiscount("true");
@@ -137,7 +137,7 @@ public class Main {
 		students.add(prox.getRegisteredUserByEmail("student@gmail.com"));
 		students.add(prox.getRegisteredUserByEmail("student1@gmail.com"));
 		students.add(prox.getRegisteredUserByEmail("student2@gmail.com"));
-		Item courseBook = new Book("Book", "Chemistry1", "2", "www.url.com", false, new Date(), new Date(), admin, "Wiley", 0.00, "7");
+		Item courseBook = new Book("Book", "Chemistry1", "2", "www.url.com", false, new Date(), new Date(), admin, "Wiley", 0.00, "false", "false", "1");
 		//subject,coursecode,startdate,enddate,textbook,faculty,students
 		Course course1 = new Course("chem","3001",formatter.parse("06/01/2024 00:55:11"),formatter.parse("26/04/2024 00:55:11"),courseBook,faculty,students);
 		courseDB.load();
