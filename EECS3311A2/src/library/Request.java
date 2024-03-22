@@ -3,13 +3,15 @@ package library;
 public class Request {
 	
 	
+	private User user;
 	private String name;
 	private String edition;
 	private String itemType;
 	private String priority;
 	private boolean completion;
 	
-	public Request(String name, String edition, String itemType, String priority, boolean completion) {
+	public Request(User user, String name, String edition, String itemType, String priority, boolean completion) {
+		this.user = user;
 		this.name = name;
 		this.edition = edition;
 		this.itemType = itemType;
@@ -18,16 +20,16 @@ public class Request {
 		
 	}
 	
-	public String notifyPriority(User u) {
-		
-		return null;
+	public Request() {
 	}
+
 	
 	
 	// getters and setters
 	public boolean isCompletion() {
 		return completion;
 	}
+	
 	public void setCompletion(boolean b){
 		completion = b;
 	}
@@ -51,6 +53,13 @@ public class Request {
 	}
 	public void setItemType(String itemType) {
 		this.itemType = itemType;
+	}
+	
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public String getPriority() {
