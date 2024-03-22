@@ -9,6 +9,9 @@ public class AdminAccount {
 	ItemDatabase itemDB = new MaintainItemsProxy();
 	MaintainUnregisteredUser URuserDB = new MaintainUnregisteredUser();
 	UserDatabase userDB = new MaintainUserProxy();
+	
+	RequestDatabase reqDB = new MaintainRequestsProxy();
+	
 	public String path;
 	
 	
@@ -118,7 +121,7 @@ public class AdminAccount {
 	}
 
 	public void disable_ItemsList(ArrayList<Item> items) {
-
+		String path = pathNames.itemDBpath;
 		//	accepts an ArrayList of items and disables their rentable.
 		for (Item i : items) {
 			i.setRentable("false");
@@ -126,6 +129,7 @@ public class AdminAccount {
 	}
 
 	public void enable_ItemsList(ArrayList<Item> items) {
+		String path = pathNames.itemDBpath;
 		//	accepts an ArrayList of items and enables their rentable.
 		for (Item i : items) {
 			i.setRentable("true");
@@ -133,23 +137,35 @@ public class AdminAccount {
 	}
 
 	public void add_createItem(Item i) {
-
+		String path = pathNames.itemDBpath;
 		//	accepts however many parameters it takes to make an item, 
 		// 	makes an item from those parameters and adds it itemDatabaseProxy.
 		itemDB.addItem(i);
 	}
 
-	public void requests() {
-
-
-
-		//	method for requests. 
-		// 	At the time i am not familiar with request database and class. Please figure it out.
+	
+	// -------- REQUEST HANDLING!
+	public void request_Accept(Request r) {
+		String path = pathNames.reqPath;
+		// admin performs this button when accepting it.
+		r.setCompletion(true); // <-- well. no point since we remove it.
+		reqDB.confirmReq(r);
+		reqDB.removeReq(r);
 		
+	}
+	
+//	public void request_Accept_Priority(int r) {
+//		String path = pathNames.reqPath;
+//		// admin performs this button when specifying priority?
+//	}
 
+	public void request_Deny(Request r) {
+		// admin performs this button when denying it.
+		String path = pathNames.reqPath;
+		reqDB.removeReq(r);
 	}
 
-
+	
 
 
 }

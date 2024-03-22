@@ -7,5 +7,6 @@ public class pathNames {
 	public static final String COURSEDBPATH = "./Course.csv";
 	public static final String subPath = "./Subscription.csv";
 	public static final String newsPath = "./NewsletterSystem.csv";
+	public static final String reqPath = "./Request.csv";
 	
 }
