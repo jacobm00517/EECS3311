@@ -22,7 +22,11 @@ public class Magazine implements Item {
 
 	private Date lostDay;
 	private boolean isLost; // the purpose of this var is to show item is unrentable bc it is lost
-	
+
+	// manages permanent items and discounts
+	private boolean purchasable;
+	private boolean onDiscount;
+
 	// ----- req 7 -----
 //	private boolean isPurchasable;
 //	private Double price;
@@ -201,4 +205,60 @@ public class Magazine implements Item {
 				return null;
 			}
 
+			@Override
+			public boolean isPurchasable() {
+				return this.purchasable;
+			}
+
+			@Override
+			public void setPurchasable(String purchasable) {
+				if (purchasable.equals("true")) {
+					this.rentable = false;
+					this.dueDate = null;
+					this.lostDay = null;
+					this.purchasable = true;
+				}
+				else {
+					this.purchasable = false;
+				}
+			}
+
+			@Override
+			public String getPurchasable() {
+				if (purchasable == true) {
+					return "true";
+				}
+				else {
+					return "false";
+				}
+			}
+
+			@Override
+			public boolean isOnDiscount() {
+				return this.onDiscount;
+			}
+
+			@Override
+			public void setOnDiscount(String onDiscount) {
+				if (onDiscount.equals("true")) {
+					this.onDiscount = true;
+				}
+				else {
+					this.onDiscount = false;
+				}
+			}
+
+			@Override
+			public String getOnDiscount() {
+				if (onDiscount == true) {
+					return "true";
+				}
+				else {
+					return "false";
+				}
+			}
+			@Override
+			public boolean getIfLost() {
+				return this.isLost;
+			}
 }
