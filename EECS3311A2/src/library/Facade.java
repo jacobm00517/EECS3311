@@ -157,10 +157,10 @@ public class Facade {
 			new FacultyFrame(this.userL);
 		}
 		else if (Facade.userL.getuserType().equals("non-faculty")){
-			new MainFrame(this.userL);
+			new VisitorFrame(this.userL);
 		}
 		else if (Facade.userL.getuserType().equals("visitor")){
-			new MainFrame(this.userL);
+			new VisitorFrame(this.userL);
 		}
 		else if (Facade.userL.getuserType().equals("admin")) {
 			new AdminFrame(this.userL);
